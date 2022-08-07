@@ -1,6 +1,7 @@
 // /* Import only those modules that you need so reduce bundle size */
 // import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 // import 'monaco-editor/esm/vs/editor/contrib/inlineCompletions/browser/ghostTextController'
+// import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution'
 // import 'monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution'
 // import 'monaco-editor/esm/vs/language/typescript/monaco.contribution'
 
@@ -11,11 +12,17 @@ import * as monaco from 'monaco-editor';
 import { elements } from '../../utils/dom'
 
 const editorCode = /* html */ `
-import { myVar } from "./test";
+import { doStuff } from "test"
+
+type A = {
+  a: 1
+}
 console.log("Hello World from monaco editor");
 const button = document.createElement("button")
 button.addEventListener("click", () => {
+  debugger
   alert("Button clicked")
+  doStuff()
 })
 button.innerHTML = "Click me"
 
@@ -23,16 +30,8 @@ button.innerHTML = "Click me"
 const body = document.getElementsByTagName("body")[0];
 body.appendChild(button);
 
-type MyType = {
-  a: number
-}
 
-const a: MyType = {
-  a: 1
-}
-
-
-console.log(myVar)
+// console.log(myVar)
 
 `.trim()
 
