@@ -12,7 +12,7 @@ let errorMessage: ErrorMessageType = ''
 
 function transpileCode(code: string): TranspiledCodeType {
   // ignore imports so Babel doesn't transpile it
-  const codeToTranspile = replace(code, importsRegex)
+  const codeToTranspile =  code //  replace(code, importsRegex)
   // the magic sauce used to transpile the code
   const options = { presets: ['es2015-loose', "typescript"],  filename: "dummy.ts", sourceMaps: "inline" }
   const { code: transpiledCode, ...others } = transform(codeToTranspile, options)
@@ -28,21 +28,41 @@ function transpileCode(code: string): TranspiledCodeType {
 
   return {
     // this is passed to `updateIframe`
-    iframeCode: hasImports ? `${imports}\n${transpiledCode}` : transpiledCode,
+    iframeCode: transpiledCode, // hasImports ? `${imports}\n${transpiledCode}` : transpiledCode,
     // this is passed to `updateSource`
     // ignore /*#__PURE__*/ from transpiled output to reduce noise
-    sourceCode: replace(transpiledCode, pureRegex),
+    sourceCode: transpiledCode, // replace(transpiledCode, pureRegex),
   }
 }
 
 function updateIframe(code: string): void {
+  const importedCode = `
+    "use strict";
+    exports.__esModule = true;
+    exports.myVar = void 0;
+    var myVar = "myVar Value";
+    exports.myVar = myVar;
+  `;
+
   const source = /* html */ `
       <html>
       <head>
         <link rel="stylesheet" href="/iframe.css">
       </head>
       <body>
-        <div id="app"></div>
+        <script type="module">
+            const importFunc = (exports) => {
+                ${importedCode}
+            }
+
+            window.require = (path) => {
+                let a = {}
+                console.log('a', a)
+                importFunc(a)
+                console.log('a', a)
+                return a
+            }
+        </script>
         <script type="module">${code}</script>
       </body>
       </html>

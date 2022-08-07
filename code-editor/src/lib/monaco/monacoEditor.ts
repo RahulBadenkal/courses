@@ -11,7 +11,7 @@ import * as monaco from 'monaco-editor';
 import { elements } from '../../utils/dom'
 
 const editorCode = /* html */ `
-
+import { myVar } from "./test";
 console.log("Hello World from monaco editor");
 const button = document.createElement("button")
 button.addEventListener("click", () => {
@@ -32,7 +32,7 @@ const a: MyType = {
 }
 
 
-console.log(a)
+console.log(myVar)
 
 `.trim()
 
