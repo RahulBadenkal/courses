@@ -70,7 +70,7 @@ function updateIframe(entryFileCode: string): void {
     };
     modules[${ entryFileIndex }].func(require, modules[${ entryFileIndex }].exports);
   `
-  code = transpileTSCode("dummy.ts", code, "inline")
+  code = transpileTSCode("project.ts", code, "inline")
 
   const source = /* html */ `
       <html>
