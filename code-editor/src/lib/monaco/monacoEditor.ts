@@ -20,7 +20,6 @@ type A = {
 console.log("Hello World from monaco editor");
 const button = document.createElement("button")
 button.addEventListener("click", () => {
-  debugger
   alert("Button clicked")
   doStuff()
 })
