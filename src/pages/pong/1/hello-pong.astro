@@ -1,12 +1,14 @@
 ---
 import CourseLayout from '../../../layouts/CourseLayout.astro';
 import { getPageProps } from '../common-props';
+import {Content} from "./_hello-pong.md";
+
 
 const props = getPageProps(Astro.url.pathname)
 
 ---
 <CourseLayout breadcrumbs={props.breadcrumbs} sections={props.sections} activeSectionItemSlug={props.slug}>
-    <div>Hello Pong content</div>
+    <Content />
 </CourseLayout>
 
 <style>
