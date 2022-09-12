@@ -1,0 +1,38 @@
+---
+export type SectionItem = {
+    slug: string;
+    name: string;
+    contentType: "video" | "article"
+}
+
+export interface Section {
+    id: string;
+    title: string;
+    subTitle?: string;
+    items: SectionItem[]
+}
+
+export interface Props {
+	sections: Section[],
+    activeSectionItemSlug: string;
+}
+
+const { sections, activeSectionItemSlug } = Astro.props;
+const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.slug === activeSectionItemSlug))
+---
+
+{sections.map((section) => (
+    <div style="margin-bottom: 12px">
+        <div>{section.title}</div>
+        <div style="margin-left: 12px">
+            {section.items.map((item) => (
+                <div>
+                    <a href={item.slug}>{item.name}</a>
+                </div>
+                
+            ))}    
+        </div>
+    </div>
+   
+  ))}
+

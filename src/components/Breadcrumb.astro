@@ -1,0 +1,24 @@
+---
+export interface BreadcrumbItem {
+  slug: string;
+  name: string;
+}
+
+export interface Props {
+	breadcrumbs: BreadcrumbItem[]
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<div>
+  {breadcrumbs.map((breadcreumb) => (
+    <span>{breadcreumb.name} / </span>
+  ))}
+
+</div>
+
+
+<style>
+	
+</style>

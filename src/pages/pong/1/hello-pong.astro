@@ -1,0 +1,15 @@
+---
+import type { Section, SectionItem } from '../../../components/SectionNavigator.astro';
+import CourseLayout from '../../../layouts/CourseLayout.astro';
+import { getPageProps } from '../common-props';
+
+const props = getPageProps(Astro.url.pathname)
+
+---
+<CourseLayout breadcrumbs={props.breadcrumbs} sections={props.sections} activeSectionItemSlug={props.slug}>
+
+</CourseLayout>
+
+<style>
+	
+</style>

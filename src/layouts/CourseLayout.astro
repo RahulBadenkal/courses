@@ -1,0 +1,43 @@
+---
+import type { BreadcrumbItem } from '../components/Breadcrumb.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import type { SectionItem } from '../components/SectionNavigator.astro';
+import type { Section } from '../components/SectionNavigator.astro';
+import SectionNavigator from "../components/SectionNavigator.astro"
+
+
+export interface Props {
+	breadcrumbs: BreadcrumbItem[];
+	sections: Section[];
+	activeSectionItemSlug: string;
+}
+
+let { breadcrumbs, sections, activeSectionItemSlug } = Astro.props;
+const activeSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.slug === activeSectionItemSlug), undefined);
+if (!activeSectionItem) {
+	throw `Invalid course section item slug: ${activeSectionItemSlug}`
+}
+breadcrumbs = activeSectionItem ? [...breadcrumbs, {slug: activeSectionItem.slug, name: activeSectionItem.name}] : breadcrumbs
+const title = activeSectionItem?.name
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
+		<SectionNavigator sections={sections} activeSectionItemSlug={activeSectionItem.slug}></SectionNavigator>
+		<slot />
+	</body>
+</html>
+
+<style>
+	
+</style>
+
