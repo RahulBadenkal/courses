@@ -3,7 +3,7 @@ import type { Section } from "../../components/SectionNavigator.astro"
 import type { StrictOmit } from "../../utils/types"
 
 
-export const PONG_TOP_BREADCRUMB: BreadcrumbItem[] = [{slug: 'pong', name: 'Pong'}]
+export const PONG_TOP_BREADCRUMB: BreadcrumbItem[] = [{slug: '/pong', name: 'Pong'}]
 
 
 let _sections: StrictOmit<Section, "id">[] = [

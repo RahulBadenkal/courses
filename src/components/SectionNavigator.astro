@@ -20,19 +20,24 @@ export interface Props {
 const { sections, activeSectionItemSlug } = Astro.props;
 const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.slug === activeSectionItemSlug))
 ---
-
-{sections.map((section) => (
-    <div style="margin-bottom: 12px">
-        <div>{section.title}</div>
-        <div style="margin-left: 12px">
-            {section.items.map((item) => (
-                <div>
-                    <a href={item.slug}>{item.name}</a>
+<div>
+    {sections.map((section) => (
+        <div style="margin-bottom: 12px">
+            <div>{section.title}</div>
+            <>
+                {section.subTitle && <div class="text-xs">{section.subTitle}</div>}
+                <div class="ml-4 p-1">
+                    {section.items.map((item) => (
+                        <div class:list={['p-1', 'flex'].concat(activeSectionItemSlug === item.slug ? ['bg-gray-200'] : [])}>
+                            <a class="w-full" href={item.slug}>{item.name}</a>
+                        </div>
+                        
+                    ))}    
                 </div>
-                
-            ))}    
+            </>
         </div>
-    </div>
-   
-  ))}
+       
+      ))}
+</div>
+
 

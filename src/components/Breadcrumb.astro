@@ -11,9 +11,12 @@ export interface Props {
 const { breadcrumbs } = Astro.props;
 ---
 
-<div>
-  {breadcrumbs.map((breadcreumb) => (
-    <span>{breadcreumb.name} / </span>
+<div class="text-sm flex gap-x-2">
+  {breadcrumbs.map((breadcreumb, index) => (
+    <>
+      {index !== 0 && <div>/</div>}
+      <a href={breadcreumb.slug}>{breadcreumb.name}</a>
+    </>
   ))}
 
 </div>

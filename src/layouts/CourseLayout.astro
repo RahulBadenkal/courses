@@ -30,14 +30,25 @@ const title = activeSectionItem?.name
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
-		<SectionNavigator sections={sections} activeSectionItemSlug={activeSectionItem.slug}></SectionNavigator>
-		<slot />
+	<body class="py-12 mx-24">
+		<div class="mb-4">
+			<Breadcrumb breadcrumbs={breadcrumbs}></Breadcrumb>
+		</div>
+		<div class="flex gap-x-8">
+			<div style="min-width: 250px; width: 25%; max-width: 350px;">
+				<SectionNavigator sections={sections} activeSectionItemSlug={activeSectionItem.slug}></SectionNavigator>
+			</div>	
+			<div class="grow">
+				<slot />
+			</div>
+		</div>
+		
 	</body>
 </html>
 
-<style>
-	
+<style is:global>
+    html, body {
+    margin: 0;
+    height: 100%;
+}
 </style>
-
