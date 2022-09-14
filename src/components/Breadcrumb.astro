@@ -1,6 +1,6 @@
 ---
 export interface BreadcrumbItem {
-  slug: string;
+  url: string;
   name: string;
 }
 
@@ -15,7 +15,7 @@ const { breadcrumbs } = Astro.props;
   {breadcrumbs.map((breadcreumb, index) => (
     <>
       {index !== 0 && <div>/</div>}
-      <a href={breadcreumb.slug}>{breadcreumb.name}</a>
+      <a href={breadcreumb.url}>{breadcreumb.name}</a>
     </>
   ))}
 

@@ -9,15 +9,12 @@ import SectionNavigator from "../components/SectionNavigator.astro"
 export interface Props {
 	breadcrumbs: BreadcrumbItem[];
 	sections: Section[];
-	activeSectionItemSlug: string;
+	activeSectionItemId: string;
 }
 
-let { breadcrumbs, sections, activeSectionItemSlug } = Astro.props;
-const activeSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.slug === activeSectionItemSlug), undefined);
-if (!activeSectionItem) {
-	throw `Invalid course section item slug: ${activeSectionItemSlug}`
-}
-breadcrumbs = activeSectionItem ? [...breadcrumbs, {slug: activeSectionItem.slug, name: activeSectionItem.name}] : breadcrumbs
+let { breadcrumbs, sections, activeSectionItemId } = Astro.props;
+const activeSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.id === activeSectionItemId), undefined)!;
+breadcrumbs = activeSectionItem ? [...breadcrumbs, {url: activeSectionItem.url, name: activeSectionItem.name}] : breadcrumbs
 const title = activeSectionItem?.name
 ---
 
@@ -36,7 +33,7 @@ const title = activeSectionItem?.name
 		</div>
 		<div class="flex gap-x-8">
 			<div style="min-width: 250px; width: 25%; max-width: 350px;">
-				<SectionNavigator sections={sections} activeSectionItemSlug={activeSectionItem.slug}></SectionNavigator>
+				<SectionNavigator sections={sections} activeSectionItemId={activeSectionItem.id}></SectionNavigator>
 			</div>	
 			<div class="grow">
 				<slot />

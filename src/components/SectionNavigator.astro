@@ -1,7 +1,8 @@
 ---
 export type SectionItem = {
-    slug: string;
+    id: string;
     name: string;
+    url: string;
     contentType: "video" | "article"
 }
 
@@ -14,11 +15,11 @@ export interface Section {
 
 export interface Props {
 	sections: Section[],
-    activeSectionItemSlug: string;
+    activeSectionItemId: string;
 }
 
-const { sections, activeSectionItemSlug } = Astro.props;
-const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.slug === activeSectionItemSlug))
+const { sections, activeSectionItemId } = Astro.props;
+const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.id === activeSectionItemId))
 ---
 <div>
     {sections.map((section) => (
@@ -28,8 +29,8 @@ const activeSectionIndex = sections.findIndex((section) => section.items.find((i
                 {section.subTitle && <div class="text-xs">{section.subTitle}</div>}
                 <div class="ml-4 p-1">
                     {section.items.map((item) => (
-                        <div class:list={['p-1', 'flex'].concat(activeSectionItemSlug === item.slug ? ['bg-gray-200'] : [])}>
-                            <a class="w-full" href={item.slug}>{item.name}</a>
+                        <div class:list={['p-1', 'flex'].concat(activeSectionItemId === item.id ? ['bg-gray-200'] : [])}>
+                            <a class="w-full" href={item.url}>{item.name}</a>
                         </div>
                         
                     ))}    

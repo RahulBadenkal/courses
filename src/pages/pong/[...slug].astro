@@ -1,0 +1,55 @@
+---
+import type { BreadcrumbItem } from "../../components/Breadcrumb.astro";
+import type { SectionItem } from "../../components/SectionNavigator.astro";
+import CourseLayout from "../../layouts/CourseLayout.astro";
+import { SECTIONS } from "./_pong-constants"
+
+// Content
+import OneHelloPong from "./_1/_hello-pong.mdx";
+import Default from "./_default-content.mdx";
+
+
+export async function getStaticPaths() {
+  const allSectionItems = SECTIONS.reduce((pages: SectionItem[], section) => {
+    return [...pages, ...section.items]
+  }, [])
+
+  const allPages = allSectionItems.map((item): {
+    params: { slug?: string }, props: { itemId: string }
+  } => {
+    return {
+      params: { slug: item.id },
+      props: { itemId: item.id },
+    };
+  })
+  
+  allPages.push({
+    ...allPages[0],
+    params: {slug: undefined }
+  })
+
+  return allPages
+}
+
+const { itemId } = Astro.props;
+const sections = SECTIONS.map((section) => ({...section, items: section.items.map((item) => ({...item, url: `/pong/${item.id}`}))}))
+const section = sections.find((section) => section.items.find((item) => item.id === itemId))
+if (!section) throw "Invalid Item ID"
+const breadcrumbs: BreadcrumbItem[] = [{'url': '/pong', name: 'Pong'}]
+
+let PageContent
+switch (itemId) {
+  case "1/hello-pong": {
+    PageContent = OneHelloPong
+    break
+  }
+  default: {
+    PageContent = Default
+    break
+  }
+}
+---
+
+<CourseLayout breadcrumbs={breadcrumbs} sections={sections} activeSectionItemId={itemId}>
+  <PageContent />
+</CourseLayout>
