@@ -4,7 +4,7 @@ import type { Section } from "../../components/SectionNavigator.astro"
 let _sections: any[] = [
     {
         title: "Introduction", 
-        subTitle: "What will you build in this course", 
+        subTitle: "What you will build in this course", 
         items: [
             {id: "hello-pong", name: "Hello Pong!", contentType: "video"},
             {id: "why-browser", name: "Why build a game in browser?", contentType: "video"},
