@@ -16,8 +16,8 @@ let _sections: any[] = [
         subTitle: "Learn basics of Maths/Physics & TS",
         items: [
             {id: "why-ts", name: "Why TS and not JS?", contentType: "video"},
-            {id: "ts-basics-1", name: "TS basics - 1", contentType: "video"},
-            {id: "ts-basics-2", name: "TS basics - 2", contentType: "video"},
+            {id: "ts-basics-1", name: "TS basics 1", contentType: "video"},
+            {id: "ts-basics-2", name: "TS basics 2", contentType: "video"},
             {id: "maths-basics", name: "Maths/Physics Basics", contentType: "video"},
             {id: "exercise", name: "Exercises", contentType: "article"},
         ]

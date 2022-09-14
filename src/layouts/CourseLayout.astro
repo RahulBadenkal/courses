@@ -7,12 +7,13 @@ import SectionNavigator from "../components/SectionNavigator.astro"
 
 
 export interface Props {
+	titlePrefix?: string;
 	breadcrumbs: BreadcrumbItem[];
 	sections: Section[];
 	activeSectionItemId: string;
 }
 
-let { breadcrumbs, sections, activeSectionItemId } = Astro.props;
+let { titlePrefix, breadcrumbs, sections, activeSectionItemId } = Astro.props;
 const activeSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.id === activeSectionItemId), undefined)!;
 breadcrumbs = activeSectionItem ? [...breadcrumbs, {url: activeSectionItem.url, name: activeSectionItem.name}] : breadcrumbs
 const title = activeSectionItem?.name
@@ -25,7 +26,7 @@ const title = activeSectionItem?.name
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{[title].concat(titlePrefix ? [titlePrefix]: []).join(' - ')}</title>
 	</head>
 	<body class="py-12 mx-24">
 		<div class="mb-4">

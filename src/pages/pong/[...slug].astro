@@ -32,10 +32,12 @@ export async function getStaticPaths() {
 }
 
 const { itemId } = Astro.props;
+
+const courseName = "Pong"
 const sections = SECTIONS.map((section) => ({...section, items: section.items.map((item) => ({...item, url: `/pong/${item.id}`}))}))
 const section = sections.find((section) => section.items.find((item) => item.id === itemId))
 if (!section) throw "Invalid Item ID"
-const breadcrumbs: BreadcrumbItem[] = [{'url': '/pong', name: 'Pong'}]
+const breadcrumbs: BreadcrumbItem[] = [{'url': '/pong', name: courseName}]
 
 let PageContent
 switch (itemId) {
@@ -50,6 +52,6 @@ switch (itemId) {
 }
 ---
 
-<CourseLayout breadcrumbs={breadcrumbs} sections={sections} activeSectionItemId={itemId}>
+<CourseLayout titlePrefix={courseName} breadcrumbs={breadcrumbs} sections={sections} activeSectionItemId={itemId}>
   <PageContent />
 </CourseLayout>
