@@ -1,25 +1,26 @@
 import type { Section } from "../../components/SectionNavigator.astro"
+import type { StrictOmit } from "../../utils/types"
 
 
-let _sections: any[] = [
+let _sections: StrictOmit<Section, "id">[] = [
     {
         title: "Introduction", 
         subTitle: "What you will build in this course", 
         items: [
-            {id: "hello-pong", name: "Hello Pong!", contentType: "video"},
-            {id: "why-browser", name: "Why build a game in browser?", contentType: "video"},
-            {id: "course-layout", name: "Course Layout", contentType: "video"},
+            {id: "hello-pong", url: "", name: "Hello Pong!", contentType: "video"},
+            {id: "why-browser", url: "", name: "Why build a game in browser?", contentType: "video"},
+            {id: "course-layout", url: "", name: "Course Layout", contentType: "video"},
         ]
     },
     {
         title: "Concepts Refresher", 
         subTitle: "Learn basics of Maths/Physics & TS",
         items: [
-            {id: "why-ts", name: "Why TS and not JS?", contentType: "video"},
-            {id: "ts-basics-1", name: "TS basics 1", contentType: "video"},
-            {id: "ts-basics-2", name: "TS basics 2", contentType: "video"},
-            {id: "maths-basics", name: "Maths/Physics Basics", contentType: "video"},
-            {id: "exercise", name: "Exercises", contentType: "article"},
+            {id: "why-ts", url: "", name: "Why TS and not JS?", contentType: "video"},
+            {id: "ts-basics-1", url: "", name: "TS basics 1", contentType: "video"},
+            {id: "ts-basics-2", url: "", name: "TS basics 2", contentType: "video"},
+            {id: "maths-basics", url: "", name: "Maths/Physics Basics", contentType: "video"},
+            {id: "exercise", url: "", name: "Exercises", contentType: "article"},
         ]
     }
 ]
