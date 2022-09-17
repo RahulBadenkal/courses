@@ -1,0 +1,44 @@
+---
+export type SectionItem = {
+    id: string;
+    name: string;
+    url: string;
+    contentType: "video" | "article"
+}
+
+export interface Section {
+    id: string;
+    title: string;
+    subTitle?: string;
+    items: SectionItem[]
+}
+
+export interface Props {
+	sections: Section[],
+    activeSectionItemId: string;
+}
+
+const { sections, activeSectionItemId } = Astro.props;
+const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.id === activeSectionItemId))
+---
+<div>
+    {sections.map((section) => (
+        <div style="margin-bottom: 12px">
+            <div>{section.title}</div>
+            <>
+                {section.subTitle && <div class="text-xs">{section.subTitle}</div>}
+                <div class="ml-4 p-1">
+                    {section.items.map((item) => (
+                        <div class:list={['p-1', 'flex'].concat(activeSectionItemId === item.id ? ['bg-gray-200'] : [])}>
+                            <a class="w-full" href={item.url}>{item.name}</a>
+                        </div>
+                        
+                    ))}    
+                </div>
+            </>
+        </div>
+       
+      ))}
+</div>
+
+

@@ -1,0 +1,27 @@
+---
+export interface BreadcrumbItem {
+  url: string;
+  name: string;
+}
+
+export interface Props {
+	breadcrumbs: BreadcrumbItem[]
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<div class="text-sm flex gap-x-2">
+  {breadcrumbs.map((breadcreumb, index) => (
+    <>
+      {index !== 0 && <div>/</div>}
+      <a href={breadcreumb.url}>{breadcreumb.name}</a>
+    </>
+  ))}
+
+</div>
+
+
+<style>
+	
+</style>
