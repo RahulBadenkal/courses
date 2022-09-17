@@ -1,4 +1,5 @@
 ---
+import "../../global-styles.css";
 import type { BreadcrumbItem } from "../../components/Breadcrumb.astro";
 import type { SectionItem } from "../../components/SectionNavigator.astro";
 import CourseLayout from "../../layouts/CourseLayout.astro";
@@ -52,6 +53,6 @@ switch (itemId) {
 }
 ---
 
-<CourseLayout titlePrefix={courseName} breadcrumbs={breadcrumbs} sections={sections} activeSectionItemId={itemId}>
+<CourseLayout titlePrefix={courseName} breadcrumbs={breadcrumbs} sections={sections} currentSectionItemId={itemId}>
   <PageContent />
 </CourseLayout>
