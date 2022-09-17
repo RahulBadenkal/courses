@@ -19,7 +19,7 @@ let _sections: StrictOmit<Section, "id">[] = [
             {id: "why-ts", url: "", active: true, name: "Why TS and not JS?", contentType: "video"},
             {id: "ts-use-case-1", url: "", active: false, name: "Scenario 1 - Type checks", contentType: "video"},
             {id: "ts-use-case-2", url: "", active: false, name: "Scenario 2 - Type definitions", contentType: "video"},
-            {id: "ts-basics-1", url: "", active: false, name: "TS basics 1", contentType: "video"},
+            {id: "ts-basics-1", url: "", active: true, name: "TS basics 1", contentType: "video"},
             {id: "ts-basics-2", url: "", active: false, name: "TS basics 2", contentType: "article"},
             {id: "ts-exercises", url: "", active: false, name: "Exercises", contentType: "article"},
         ]
