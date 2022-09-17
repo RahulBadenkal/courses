@@ -1,8 +1,9 @@
 ---
 export type SectionItem = {
     id: string;
-    name: string;
+    active: boolean;
     url: string;
+    name: string;
     contentType: "video" | "article"
 }
 
@@ -15,11 +16,12 @@ export interface Section {
 
 export interface Props {
 	sections: Section[],
-    activeSectionItemId: string;
+    currentSectionItemId: string;
 }
 
-const { sections, activeSectionItemId } = Astro.props;
-const activeSectionIndex = sections.findIndex((section) => section.items.find((item) => item.id === activeSectionItemId))
+const { sections, currentSectionItemId } = Astro.props;
+const currentSectionIndex = sections.findIndex((section) => section.items.find((item) => item.id === currentSectionItemId))
+
 ---
 <div>
     {sections.map((section) => (
@@ -29,8 +31,11 @@ const activeSectionIndex = sections.findIndex((section) => section.items.find((i
                 {section.subTitle && <div class="text-xs">{section.subTitle}</div>}
                 <div class="ml-4 p-1">
                     {section.items.map((item) => (
-                        <div class:list={['p-1', 'flex'].concat(activeSectionItemId === item.id ? ['bg-gray-200'] : [])}>
-                            <a class="w-full" href={item.url}>{item.name}</a>
+                        <div class={`p-1 flex ${currentSectionItemId === item.id ? 'bg-gray-200' : ''} ${item.active ? 'hover:bg-gray-200' : 'opacity-50'}`}>
+                            { item.active? 
+                                <a class="w-full" href={item.url}>{item.name}</a> :
+                                <div class="w-full">{item.name}</div>
+                            }               
                         </div>
                         
                     ))}    
@@ -40,5 +45,4 @@ const activeSectionIndex = sections.findIndex((section) => section.items.find((i
        
       ))}
 </div>
-
 

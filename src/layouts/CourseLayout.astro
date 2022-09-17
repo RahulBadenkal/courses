@@ -10,13 +10,13 @@ export interface Props {
 	titlePrefix?: string;
 	breadcrumbs: BreadcrumbItem[];
 	sections: Section[];
-	activeSectionItemId: string;
+	currentSectionItemId: string;
 }
 
-let { titlePrefix, breadcrumbs, sections, activeSectionItemId } = Astro.props;
-const activeSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.id === activeSectionItemId), undefined)!;
-breadcrumbs = activeSectionItem ? [...breadcrumbs, {url: activeSectionItem.url, name: activeSectionItem.name}] : breadcrumbs
-const title = activeSectionItem?.name
+let { titlePrefix, breadcrumbs, sections, currentSectionItemId } = Astro.props;
+const currentSectionItem = sections.reduce((item: SectionItem | undefined, section) => item || section.items.find(item => item.id === currentSectionItemId), undefined)!;
+breadcrumbs = currentSectionItem ? [...breadcrumbs, {url: currentSectionItem.url, name: currentSectionItem.name}] : breadcrumbs
+const title = currentSectionItem?.name
 ---
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ const title = activeSectionItem?.name
 		</div>
 		<div class="flex gap-x-8">
 			<div style="min-width: 250px; width: 25%; max-width: 350px;">
-				<SectionNavigator sections={sections} activeSectionItemId={activeSectionItem.id}></SectionNavigator>
+				<SectionNavigator sections={sections} currentSectionItemId={currentSectionItem.id}></SectionNavigator>
 			</div>	
 			<div class="grow">
 				<slot />

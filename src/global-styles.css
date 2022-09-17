@@ -1,0 +1,6 @@
+.link {
+    color: theme('colors.blue.600');
+}
+.link.hover:hover {
+    text-decoration: underline;
+}
